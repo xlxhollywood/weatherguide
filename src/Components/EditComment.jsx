@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Typography, Paper, Button, TextField, RadioGroup, FormControlLabel, FormLabel, FormControl } from '@material-ui/core';
+import { Container, Typography, Paper, Button, TextField, RadioGroup, FormControl } from '@material-ui/core';
 import { useForm } from 'react-hook-form';
 import { getAllComments, editComment } from '../service/api';
 import { useHistory, useParams } from 'react-router-dom';
@@ -18,7 +18,7 @@ const initialValue = {
 const EditComment = () => {
 
     const [comment, setComment] = useState(initialValue);
-    const { landmark_id, review_author, review_content, created_at, visited_date, rating, recommend_num, best_companion } = comment;
+    const { landmark_id } = comment;
     const { register, handleSubmit, setValue, formState: { errors } } = useForm();
 
     const { id } = useParams();

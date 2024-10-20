@@ -1,8 +1,7 @@
 import './App.css';
-import Navbar from './Components/Navbar';
+import Navbar from  './Components/Navbar';
 import Home from './Components/Home';
 import AllComments from './Components/AllComments';
-import AddUser from './Components/AddComment';
 import EditUser from './Components/EditComment';
 import NotFound from './Components/NotFound';
 
@@ -14,15 +13,15 @@ function App() {
   return (
     <Router>
       <div className='container'>
-        <Navbar />
-        <Switch>
-          <Route path="/" component={Home} exact />
-          <Route path="/all" component={AllComments} exact />
-          <Route path="/detailpage/:landmark_id" component={DetailPage} exact />
-          <Route path="/add/:landmark_id" component={AddComment} exact />
-          <Route path="/edit/:id" component={EditUser} exact />
-          <Route component={NotFound} />
-        </Switch>
+      <Navbar />
+      <Switch>
+        <Route path="/" component={Home} exact />
+        <Route path="/all" component={AllComments} exact />
+        <Route path="/detailpage/:landmark_id" component={DetailPage} exact />
+        <Route path="/add/:landmark_id" component={AddComment} exact />
+        <Route path="/edit/:id" component={EditUser} exact />
+        <Route component={NotFound} />
+      </Switch>
       </div>
     </Router>
   );

@@ -2,7 +2,6 @@ import React from 'react';
 import { AppBar, makeStyles, Toolbar } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
 import { ReactComponent as Logo } from './images/logo.svg';
-import { fontGrid } from '@mui/material/styles/cssUtils';
 
 const useStyles = makeStyles({
     header: {
