@@ -1,37 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { Table, TableCell, TableRow, TableHead, TableBody, makeStyles, Button } from '@material-ui/core';
+import { Box, Typography, Button, TextField, Grid, Paper } from '@mui/material';
 import { deleteComment, getAllComments } from '../service/api';
-import { Link } from 'react-router-dom';
-import Carousel from './Pages/Carousel';
-
-const useStyle = makeStyles({
-    table: {
-        maxWidth: '1050px',
-        margin: '0 auto', // Center the header,
-    },
-    thead: {
-        '& > *': {
-            background: 'gray',
-            color: 'white',
-            fontSize: '16px',
-            height: '20px',
-        }
-    },
-    trow: {
-        '& > *': {
-            fontSize: '16px'
-        }
-    }
-})
+import { Link, useParams } from 'react-router-dom';
 
 
+const AllComment = () => {
 
+    const [comments, setComment] = useState([]);
+    const [landmarkInfo, setLandmarkInfo] = useState([]);
+    const [searchQuery, setSearchQuery] = useState('');
 
-const AllComments = () => {
-
-    const classes = useStyle();
-
-    const [comment, setComment] = useState([]);
     useEffect(() => {
         getComments();
     }, [])
@@ -42,55 +20,67 @@ const AllComments = () => {
         setComment(response.data);
     }
 
-    const deleteData = async (id) => {
-        await deleteComment(id);
-        getComments();
+    const filteredComments = comments.filter(comment =>
+        comment.review_author.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
+    const handleSearch = () => {
+        const searchKey = document.getElementById("searchKeys").value;
+        setSearchQuery(searchKey);
     }
+
+
+    const deleteData = async (id) => {
+        const deleteConfirm = window.confirm('정말로 이 댓글을 삭제하시겠습니까?');
+        if (deleteConfirm) {
+            await deleteComment(id);
+            getComments();
+        }
+
+    }
+
+
 
     return (
 
-        <>
-        <Carousel landmark_id="pohang" />
-        <Table className={classes.table}>
-            <TableHead>
-                <TableRow className={classes.thead}>
-                    <TableCell>ID</TableCell>
-                    <TableCell>Landmark ID</TableCell>
-                    <TableCell>review_author</TableCell>
-                    <TableCell>review_content</TableCell>
-                    <TableCell>created_at</TableCell>
-                    <TableCell>visited_date</TableCell>
-                    <TableCell>rating</TableCell>
-                    <TableCell>recommend_num</TableCell>
-                    <TableCell>best_companion</TableCell>
-                    <TableCell>Edit/Delete</TableCell>
-                </TableRow>
-            </TableHead>
-            <TableBody>
-                {
-                    comment.map((data) => (
-                        <TableRow className={classes.trow}>
-                            <TableCell>{data.id}</TableCell>
-                            <TableCell>{data.landmark_id}</TableCell>
-                            <TableCell>{data.review_author}</TableCell>
-                            <TableCell>{data.review_content}</TableCell>
-                            <TableCell>{data.created_at}</TableCell>
-                            <TableCell>{data.visited_date}</TableCell>
-                            <TableCell>{data.rating}</TableCell>
-                            <TableCell>{data.recommend_num}</TableCell>
-                            <TableCell>{data.best_companion}</TableCell>
-                            <TableCell>
-                                <Button variant="contained" style={{ backgroundColor: 'skyblue', color: 'white', margin: '0px 20px' }} component={Link} to={`/edit/${data.id}`}>Edit</Button>
-                                <Button variant="contained" style={{ backgroundColor: 'yellow', color: 'black', margin: '0px 20px' }} onClick={() => deleteData(data.id)}>Delete</Button>
-                            </TableCell>
+        <Box sx={{ maxWidth: '1050px', mx: 'auto', padding: 2 }}>
+            <Grid container spacing={2} sx={{ mt: 1 }}>
 
-                        </TableRow>
-                    ))
-                }
-            </TableBody>
-        </Table>
-        </>
-    )
-}
+                    <Paper sx={{ padding: 2 }}>
+                        <Box mb={2} sx={{ display: 'flex', alignItems: 'center', width: "100%", }}>
+                            <TextField
+                                id="searchKeys"
+                                variant="outlined"
+                                fullWidth
+                                placeholder="Search by author's name"
 
-export default AllComments;
+                            />
+                            <Button for onClick={handleSearch}><i class="bi bi-search" style={{ fontSize: '1.5rem' }}></i></Button>
+                        </Box>
+                        <Box sx={{ maxHeight: '450px', overflowY: 'auto' }}>
+                            {filteredComments.map((comment) => (
+                                <Box key={comment.id} sx={{ mb: 2, border: '1px solid #ccc', padding: 1 }}>
+                                    <Typography variant="subtitle2">{comment.review_author}</Typography>
+                                    <Typography variant="body2">{comment.review_content}</Typography>
+                                    <Typography variant="caption">작성날짜: {comment.created_at}</Typography>
+                                    <Typography variant="caption"> |  방문날짜: {comment.visited_date}</Typography>
+                                    <Typography variant="caption"> |  평점: {comment.rating}</Typography>
+                                    <Typography variant="caption"> |  추천수: {comment.recommend_num}</Typography>
+                                    <Typography variant="caption"> |  추천 동행인: {comment.best_companion}</Typography>
+                                    <Box sx={{ justifyContent: 'flex-end' }}>
+                                        <Button variant="contained" style={{ fontSize: '0.7rem', marginRight: '3px' }} component={Link} to={`/edit/${comment.id}`}><i class="bi bi-pencil-fill"></i></Button>
+                                        <Button variant="contained" style={{ fontSize: '0.7rem' }} onClick={() => deleteData(comment.id)}><i class="bi bi-trash3-fill"></i></Button>
+                                    </Box>
+                                </Box>
+                            ))}
+                        </Box>
+                    </Paper>
+                </Grid>
+                
+ 
+        </Box>
+    );
+};
+
+
+export default AllComment;
