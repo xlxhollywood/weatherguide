@@ -140,7 +140,7 @@ const DetailPage = () => {
                                 placeholder="Search by author's name"
 
                             />
-                            <Button for onClick={handleSearch}><i class="bi bi-search" style={{ fontSize: '1.5rem' }}></i></Button>
+                            <Button for onClick={handleSearch}><i className="bi bi-search" style={{ fontSize: '1.5rem' }}></i></Button>
                         </Box>
                         <Button variant="contained" color="primary" sx={{ mb: 2 }} component={Link} to={`/add/${landmark_id}`}>
                             새로운 후기 쓰기
@@ -148,7 +148,7 @@ const DetailPage = () => {
                         <Box sx={{ maxHeight: '400px', overflowY: 'auto' }}>
                             {filteredComments.map((comment) => (
                                 <Box key={comment.id} sx={{ mb: 2, border: '1px solid #ccc', padding: 1 }}>
-                                    <Typography variant="h6">{comment.review_author} <Button onClick={() => clickLike(comment.id)}>좋아요<i class="bi bi-hand-thumbs-up-fill"></i>{comment.recommend_num}</Button></Typography>
+                                    <Typography variant="h6">{comment.review_author} <Button onClick={() => clickLike(comment.id)}>좋아요<i className="bi bi-hand-thumbs-up-fill"></i>{comment.recommend_num}</Button></Typography>
 
                                     <Typography variant="body2">{comment.review_content}</Typography>
                                     <br />
@@ -158,8 +158,8 @@ const DetailPage = () => {
 
                                     <Typography variant="caption">추천 동행인: {comment.best_companion}</Typography>
                                     <Box sx={{ justifyContent: 'flex-end' }}>
-                                        <Button variant="contained" style={{ fontSize: '0.7rem', marginRight: '3px' }} component={Link} to={`/edit/${comment.id}`}><i class="bi bi-pencil-fill"></i></Button>
-                                        <Button variant="contained" style={{ fontSize: '0.7rem' }} onClick={() => deleteData(comment.id)}><i class="bi bi-trash3-fill"></i></Button>
+                                        <Button variant="contained" style={{ fontSize: '0.7rem', marginRight: '3px' }} component={Link} to={`/edit/${comment.id}`}><i className="bi bi-pencil-fill"></i></Button>
+                                        <Button variant="contained" style={{ fontSize: '0.7rem' }} onClick={() => deleteData(comment.id)}><i className="bi bi-trash3-fill"></i></Button>
                                     </Box>
                                 </Box>
                             ))}
@@ -171,7 +171,7 @@ const DetailPage = () => {
                         <Typography variant="h5">평균 평점: {findAverageRating()}</Typography>
                         <Typography variant="body1">총 후기: {filteredComments.length} 개</Typography>
                         <hr />
-                        <Typography variant="h6">Best 후기<i class="bi bi-hand-thumbs-up"></i> : 좋아요 {findBestComment().recommend_num}개</Typography>
+                        <Typography variant="h6">Best 후기<i className="bi bi-hand-thumbs-up"></i> : 좋아요 {findBestComment().recommend_num}개</Typography>
                         <Typography variant="body2">
                             작성자: {findBestComment().review_author} | 평점: {findBestComment().rating} {starRating(findBestComment().rating)}
                             <br />"{findBestComment().review_content}"

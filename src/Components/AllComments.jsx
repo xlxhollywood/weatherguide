@@ -52,7 +52,7 @@ const AllComment = () => {
                             placeholder="Search by author's name"
 
                         />
-                        <Button for onClick={handleSearch}><i class="bi bi-search" style={{ fontSize: '1.5rem' }}></i></Button>
+                        <Button for onClick={handleSearch}><i className="bi bi-search" style={{ fontSize: '1.5rem' }}></i></Button>
                     </Box>
                     <Box sx={{ maxHeight: '450px', overflowY: 'auto' }}>
                         {filteredComments.map((comment) => (
@@ -65,8 +65,8 @@ const AllComment = () => {
                                 <Typography variant="caption"> |  추천수: {comment.recommend_num}</Typography>
                                 <Typography variant="caption"> |  추천 동행인: {comment.best_companion}</Typography>
                                 <Box sx={{ justifyContent: 'flex-end' }}>
-                                    <Button variant="contained" style={{ fontSize: '0.7rem', marginRight: '3px' }} component={Link} to={`/edit/${comment.id}`}><i class="bi bi-pencil-fill"></i></Button>
-                                    <Button variant="contained" style={{ fontSize: '0.7rem' }} onClick={() => deleteData(comment.id)}><i class="bi bi-trash3-fill"></i></Button>
+                                    <Button variant="contained" style={{ fontSize: '0.7rem', marginRight: '3px' }} component={Link} to={`/edit/${comment.id}`}><i className="bi bi-pencil-fill"></i></Button>
+                                    <Button variant="contained" style={{ fontSize: '0.7rem' }} onClick={() => deleteData(comment.id)}><i className="bi bi-trash3-fill"></i></Button>
                                 </Box>
                             </Box>
                         ))}
