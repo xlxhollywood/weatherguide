@@ -1,21 +1,27 @@
 #navigateButton {
-  background: none;        /* 기본 배경 제거 */
-  border: none;           /* 기본 테두리 제거 */
-  font: inherit;          /* 상위 요소의 글꼴 속성 사용 */
-  color: inherit;         /* 상위 요소의 글꼴 색상 사용 */
-  cursor: pointer;        /* 커서를 손가락 모양으로 변경 */
-  outline: none;          /* 포커스 시 생기는 아웃라인 제거 */
+  background: none;
+  /* 기본 배경 제거 */
+  border: none;
+  /* 기본 테두리 제거 */
+  font: inherit;
+  /* 상위 요소의 글꼴 속성 사용 */
+  color: inherit;
+  /* 상위 요소의 글꼴 색상 사용 */
+  cursor: pointer;
+  /* 커서를 손가락 모양으로 변경 */
+  outline: none;
+  /* 포커스 시 생기는 아웃라인 제거 */
 }
 
 
 
 .search-container {
-  justify-self:right
+  justify-self: right
 }
 
 .home-container {
-  width : 100%;
-  
+  width: 100%;
+
 }
 
 .flex {
@@ -26,15 +32,19 @@
 
 /* ExampleComponent.css */
 .grid-container {
-  
+
   margin-top: 10px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3열 */
-  grid-template-rows: auto; /* 3행/auto */
-  gap: 30px; /* 각 항목 사이의 간격 */
+  grid-template-columns: repeat(3, 1fr);
+  /* 3열 */
+  grid-template-rows: auto;
+  /* 3행/auto */
+  gap: 30px;
+  /* 각 항목 사이의 간격 */
   padding: 20px;
   justify-items: center;
-  align-items: center; /* 수직 정렬 (중앙) */
+  align-items: center;
+  /* 수직 정렬 (중앙) */
 }
 
 @media (max-width: 768px) {
@@ -72,7 +82,7 @@
 .non-flex {
   margin-left: -15px;
   padding-left: 0;
-  margin-right: 20px; 
+  margin-right: 20px;
   margin-top: 20px;
 }
 
@@ -84,7 +94,7 @@ img {
   color: #666;
   font-size: 12.5px;
   margin: 5px 0px 0px 0px;
-  padding: 0; 
+  padding: 0;
 }
 
 .review-title {
@@ -94,7 +104,7 @@ img {
   padding: 0;
 }
 
-.review-star{
+.review-star {
   font-size: 16px;
 }
 

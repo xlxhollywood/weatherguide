@@ -40,12 +40,10 @@ const DetailPage = () => {
         setLandmarkInfo(infoList[landmark_id]);
     };
 
-
-
     const getLandmarkComments = (landmark_id) => {
         return comments.filter(comment => comment.landmark_id == landmark_id);
     }
-   
+
 
     const landmarkComments = getLandmarkComments(landmark_id);
 
@@ -54,11 +52,11 @@ const DetailPage = () => {
     );
 
     const findAverageRating = () => {
-        if (filteredComments.length === 0){
+        if (filteredComments.length === 0) {
             return null;
         }
         const totalStars = filteredComments.reduce((sum, comment) => sum + Number(comment.rating), 0);
-        const averageRating = (totalStars/filteredComments.length);
+        const averageRating = (totalStars / filteredComments.length);
         //alert(`${totalStars}//${averageRating}//${comments.length}`);
         return (averageRating.toFixed(1) + starRating(averageRating.toFixed(0)));
     }
@@ -68,7 +66,7 @@ const DetailPage = () => {
             return 0;
         }
         const bestComment = filteredComments.reduce((max, comment) => {
-            return (comment.recommend_num > max.recommend_num) ? comment: max;
+            return (comment.recommend_num > max.recommend_num) ? comment : max;
         });
         return bestComment;
     }
@@ -78,7 +76,7 @@ const DetailPage = () => {
         setSearchQuery(searchKey);
     }
 
-    const clickLike = async(id) => {
+    const clickLike = async (id) => {
         const updatedComments = comments.map(comment => {
             if (comment.id === id) {
                 return {
@@ -88,11 +86,11 @@ const DetailPage = () => {
             }
             return comment; // 다른 댓글은 그대로 반환
         });
-    
+
         // 좋아요 수가 증가한 댓글을 API에 전달
         const updatedComment = updatedComments.find(comment => comment.id === id);
         await editComment(id, updatedComment);
-        
+
         // 댓글 목록 새로고침
         getComments();
     };
@@ -105,7 +103,7 @@ const DetailPage = () => {
             case '4': return "⭐⭐⭐⭐";
             case '5': return "⭐⭐⭐⭐⭐";
             default: return "알 수 없음";
-          }
+        }
     }
 
     const deleteData = async (id) => {
@@ -116,7 +114,6 @@ const DetailPage = () => {
         }
 
     }
-
 
 
     return (
@@ -152,13 +149,13 @@ const DetailPage = () => {
                             {filteredComments.map((comment) => (
                                 <Box key={comment.id} sx={{ mb: 2, border: '1px solid #ccc', padding: 1 }}>
                                     <Typography variant="h6">{comment.review_author} <Button onClick={() => clickLike(comment.id)}>좋아요<i class="bi bi-hand-thumbs-up-fill"></i>{comment.recommend_num}</Button></Typography>
-                                    
+
                                     <Typography variant="body2">{comment.review_content}</Typography>
                                     <br />
                                     <Typography variant="body2">평점: {comment.rating}{starRating(comment.rating)}</Typography><br />
                                     <Typography variant="body2">작성날짜: {comment.created_at}</Typography>
                                     <Typography variant="body2">방문날짜: {comment.visited_date}</Typography>
-                                    
+
                                     <Typography variant="caption">추천 동행인: {comment.best_companion}</Typography>
                                     <Box sx={{ justifyContent: 'flex-end' }}>
                                         <Button variant="contained" style={{ fontSize: '0.7rem', marginRight: '3px' }} component={Link} to={`/edit/${comment.id}`}><i class="bi bi-pencil-fill"></i></Button>

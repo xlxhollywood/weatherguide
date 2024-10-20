@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Typography, Button, TextField, Grid, Paper } from '@mui/material';
 import { deleteComment, getAllComments } from '../service/api';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 const AllComment = () => {
 
     const [comments, setComment] = useState([]);
-    const [landmarkInfo, setLandmarkInfo] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
 
     useEffect(() => {
@@ -39,45 +38,43 @@ const AllComment = () => {
 
     }
 
-
-
     return (
 
         <Box sx={{ maxWidth: '1050px', mx: 'auto', padding: 2 }}>
             <Grid container spacing={2} sx={{ mt: 1 }}>
 
-                    <Paper sx={{ padding: 2 }}>
-                        <Box mb={2} sx={{ display: 'flex', alignItems: 'center', width: "100%", }}>
-                            <TextField
-                                id="searchKeys"
-                                variant="outlined"
-                                fullWidth
-                                placeholder="Search by author's name"
+                <Paper sx={{ padding: 2 }}>
+                    <Box mb={2} sx={{ display: 'flex', alignItems: 'center', width: "100%", }}>
+                        <TextField
+                            id="searchKeys"
+                            variant="outlined"
+                            fullWidth
+                            placeholder="Search by author's name"
 
-                            />
-                            <Button for onClick={handleSearch}><i class="bi bi-search" style={{ fontSize: '1.5rem' }}></i></Button>
-                        </Box>
-                        <Box sx={{ maxHeight: '450px', overflowY: 'auto' }}>
-                            {filteredComments.map((comment) => (
-                                <Box key={comment.id} sx={{ mb: 2, border: '1px solid #ccc', padding: 1 }}>
-                                    <Typography variant="subtitle2">{comment.review_author}</Typography>
-                                    <Typography variant="body2">{comment.review_content}</Typography>
-                                    <Typography variant="caption">작성날짜: {comment.created_at}</Typography>
-                                    <Typography variant="caption"> |  방문날짜: {comment.visited_date}</Typography>
-                                    <Typography variant="caption"> |  평점: {comment.rating}</Typography>
-                                    <Typography variant="caption"> |  추천수: {comment.recommend_num}</Typography>
-                                    <Typography variant="caption"> |  추천 동행인: {comment.best_companion}</Typography>
-                                    <Box sx={{ justifyContent: 'flex-end' }}>
-                                        <Button variant="contained" style={{ fontSize: '0.7rem', marginRight: '3px' }} component={Link} to={`/edit/${comment.id}`}><i class="bi bi-pencil-fill"></i></Button>
-                                        <Button variant="contained" style={{ fontSize: '0.7rem' }} onClick={() => deleteData(comment.id)}><i class="bi bi-trash3-fill"></i></Button>
-                                    </Box>
+                        />
+                        <Button for onClick={handleSearch}><i class="bi bi-search" style={{ fontSize: '1.5rem' }}></i></Button>
+                    </Box>
+                    <Box sx={{ maxHeight: '450px', overflowY: 'auto' }}>
+                        {filteredComments.map((comment) => (
+                            <Box key={comment.id} sx={{ mb: 2, border: '1px solid #ccc', padding: 1 }}>
+                                <Typography variant="subtitle2">{comment.review_author}</Typography>
+                                <Typography variant="body2">{comment.review_content}</Typography>
+                                <Typography variant="caption">작성날짜: {comment.created_at}</Typography>
+                                <Typography variant="caption"> |  방문날짜: {comment.visited_date}</Typography>
+                                <Typography variant="caption"> |  평점: {comment.rating}</Typography>
+                                <Typography variant="caption"> |  추천수: {comment.recommend_num}</Typography>
+                                <Typography variant="caption"> |  추천 동행인: {comment.best_companion}</Typography>
+                                <Box sx={{ justifyContent: 'flex-end' }}>
+                                    <Button variant="contained" style={{ fontSize: '0.7rem', marginRight: '3px' }} component={Link} to={`/edit/${comment.id}`}><i class="bi bi-pencil-fill"></i></Button>
+                                    <Button variant="contained" style={{ fontSize: '0.7rem' }} onClick={() => deleteData(comment.id)}><i class="bi bi-trash3-fill"></i></Button>
                                 </Box>
-                            ))}
-                        </Box>
-                    </Paper>
-                </Grid>
-                
- 
+                            </Box>
+                        ))}
+                    </Box>
+                </Paper>
+            </Grid>
+
+
         </Box>
     );
 };

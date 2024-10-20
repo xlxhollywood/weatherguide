@@ -9,11 +9,11 @@ export const getAllComments = async (id) => {
 }
 
 export const addComment = async (comment) => {
-    return await axios.post(url,comment);
+    return await axios.post(url, comment);
 }
 
 export const editComment = async (id, comment) => {
-    return await axios.put(`${url}/${id}`,comment);
+    return await axios.put(`${url}/${id}`, comment);
 }
 
 

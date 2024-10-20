@@ -16,10 +16,10 @@ import review9 from './images/review9.png';
 
 // ReviewCard 컴포넌트 생성
 const ReviewCard = ({ image, address, title, starRating, reviewCount, weather, rainfall, skyCondition }) => (
-  
-  
+
+
   <div className='grid-item'>
-    <img className="grid-review" src={image} alt={title} style={{ width: '220px', height: '220px' } } />
+    <img className="grid-review" src={image} alt={title} style={{ width: '220px', height: '220px' }} />
     <p className="review-address">{address}</p>
     <p className="review-title">{title}</p>
     {/* 기온, 강수량, 하늘 상태를 표시합니다 */}
@@ -58,7 +58,7 @@ const getSkyCondition = (skyCode, ptyCode) => {
 const getBaseTime = () => {
   const now = new Date();
   const hours = now.getHours();
-  
+
   // API 제공 시간에 맞는 시간 배열 (00:00, 03:00, 06:00 등)
   const availableTimes = ['0200', '0500', '0800', '1100', '1400', '1700', '2000', '2300'];
 
@@ -69,7 +69,7 @@ const getBaseTime = () => {
       closestTime = time;
     }
   }
-  
+
   return closestTime;
 };
 
@@ -183,7 +183,7 @@ const Home = () => {
   }
 
   return (
-    
+
     <div className='home-container'>
       <hr></hr>
       <div className='search-container'>
@@ -197,17 +197,17 @@ const Home = () => {
       <div className='grid-container'>
         {filteredReviews.map((review, index) => (
           <button id="navigateButton" onClick={() => clickToDetail(index)}>
-          <ReviewCard 
-            key={index}
-            image={review.image}
-            address={review.address}
-            title={review.title}
-            weather={weatherData[index]}
-            rainfall={rainfallData[index]}
-            skyCondition={skyData[index]}
-            starRating={review.starRating}
-            reviewCount={review.reviewCount}
-          />
+            <ReviewCard
+              key={index}
+              image={review.image}
+              address={review.address}
+              title={review.title}
+              weather={weatherData[index]}
+              rainfall={rainfallData[index]}
+              skyCondition={skyData[index]}
+              starRating={review.starRating}
+              reviewCount={review.reviewCount}
+            />
           </button>
         ))}
       </div>

@@ -116,8 +116,8 @@ const AddComment = () => {
                                 <input {...register("best_companion", { required: "추천 동행인을 선택해 주세요." })} type="radio" value="애인" />
                                 애인 ]
                             </label>
-                            </RadioGroup>
-                            {errors.best_companion && (
+                        </RadioGroup>
+                        {errors.best_companion && (
                             <Typography variant="body2" color="error">
                                 {errors.best_companion.message}
                             </Typography>

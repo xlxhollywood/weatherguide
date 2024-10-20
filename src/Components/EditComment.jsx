@@ -18,7 +18,7 @@ const initialValue = {
 const EditComment = () => {
 
     const [comment, setComment] = useState(initialValue);
-    const {landmark_id, review_author, review_content, created_at, visited_date, rating, recommend_num, best_companion} = comment;
+    const { landmark_id, review_author, review_content, created_at, visited_date, rating, recommend_num, best_companion } = comment;
     const { register, handleSubmit, setValue, formState: { errors } } = useForm();
 
     const { id } = useParams();
@@ -42,7 +42,7 @@ const EditComment = () => {
     }
 
 
-    const onSubmit = async(data) => {
+    const onSubmit = async (data) => {
         const today = new Date();
         const formattedDate = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
         const updatedComment = {
@@ -65,18 +65,18 @@ const EditComment = () => {
             <Paper style={{ padding: '20px' }}>
                 <Typography variant="h5" align="center">댓글 수정</Typography>
                 <form onSubmit={handleSubmit(onSubmit)}>
+                    <Typography variant='subtitle1'>작성자</Typography>
                     <TextField
                         fullWidth
-                        label="작성자"
                         {...register("review_author", { required: "이름을 입력해 주세요.", maxLength: { value: 30, message: "최대 30자까지 입력 가능합니다." } })}
                         error={!!errors.review_author}
                         helperText={errors.review_author ? errors.review_author.message : ""}
                     />
                     <br />
                     <br />
+                    <Typography variant='subtitle1'>작성자</Typography>
                     <TextField
                         fullWidth
-                        label="내용"
                         multiline
                         rows={4}
                         {...register("review_content", { required: "내용을 입력해 주세요.", maxLength: { value: 500, message: "최대 500자까지 입력 가능합니다." } })}
@@ -126,8 +126,8 @@ const EditComment = () => {
                                 <input {...register("best_companion", { required: "추천 동행인을 선택해 주세요." })} type="radio" value="애인" />
                                 애인 ]
                             </label>
-                            </RadioGroup>
-                            {errors.best_companion && (
+                        </RadioGroup>
+                        {errors.best_companion && (
                             <Typography variant="body2" color="error">
                                 {errors.best_companion.message}
                             </Typography>
