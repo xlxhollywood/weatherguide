@@ -100,7 +100,7 @@ const Home = () => {
     try {
       // 초단기 실황 (기온, 강수량)
       const ultraSrtResponses = await Promise.all(reviewData.map((review) => {
-        return axios.get('http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst', {
+        return axios.get('https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst', {
           params: {
             serviceKey: 'q67gG37dAhg0kMIi8NXRmK/oaW/bjoakKyt8VIq/QE0IRQAUSOgcmy4+/WiMq5dZGs5Y9k+XqdfByy2mRo41Qw==',
             pageNo: '1',
@@ -124,7 +124,7 @@ const Home = () => {
 
       // 단기 예보 (하늘 상태)
       const vilageFcstResponses = await Promise.all(reviewData.map((review) => {
-        return axios.get('http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst', {
+        return axios.get('https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst', {
           params: {
             serviceKey: 'q67gG37dAhg0kMIi8NXRmK/oaW/bjoakKyt8VIq/QE0IRQAUSOgcmy4+/WiMq5dZGs5Y9k+XqdfByy2mRo41Qw==',
             pageNo: '1',
