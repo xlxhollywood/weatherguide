@@ -45,19 +45,33 @@ const DetailPage = () => {
     const getLandmarkComments = (landmark_id) => {
         return comments.filter(comment => comment.landmark_id == landmark_id);
     }
-
-
-    const findAverageRating = () => {
-        let totalStars = comments.reduce((sum, comment) => sum + comment.rating, 0);
-        const averageRating = (totalStars/comments.length);
-        return(averageRating);
-    }
+   
 
     const landmarkComments = getLandmarkComments(landmark_id);
 
     const filteredComments = landmarkComments.filter(comment =>
         comment.review_author.toLowerCase().includes(searchQuery.toLowerCase())
     );
+
+    const findAverageRating = () => {
+        if (filteredComments.length === 0){
+            return null;
+        }
+        const totalStars = filteredComments.reduce((sum, comment) => sum + Number(comment.rating), 0);
+        const averageRating = (totalStars/filteredComments.length);
+        //alert(`${totalStars}//${averageRating}//${comments.length}`);
+        return (averageRating.toFixed(1) + starRating(averageRating.toFixed(0)));
+    }
+
+    const findBestComment = () => {
+        if (filteredComments.length === 0) {
+            return 0;
+        }
+        const bestComment = filteredComments.reduce((max, comment) => {
+            return (comment.recommend_num > max.recommend_num) ? comment: max;
+        });
+        return bestComment;
+    }
 
     const handleSearch = () => {
         const searchKey = document.getElementById("searchKeys").value;
@@ -157,8 +171,13 @@ const DetailPage = () => {
                 </Grid>
                 <Grid item xs={12} md={4}>
                     <Paper sx={{ padding: 2 }}>
-                        <Typography variant="h5">평균 평점:</Typography>
+                        <Typography variant="h5">평균 평점: {findAverageRating()}</Typography>
+                        <Typography variant="body1">총 후기: {filteredComments.length} 개</Typography>
+                        <hr />
+                        <Typography variant="h6">Best 후기<i class="bi bi-hand-thumbs-up"></i> : 좋아요 {findBestComment().recommend_num}개</Typography>
                         <Typography variant="body2">
+                            작성자: {findBestComment().review_author} | 평점: {findBestComment().rating} {starRating(findBestComment().rating)}
+                            <br />"{findBestComment().review_content}"
                         </Typography>
                     </Paper>
                 </Grid>

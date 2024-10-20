@@ -1,18 +1,19 @@
 import React from 'react';
 import { AppBar, makeStyles, Toolbar } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
+import {ReactComponent as Logo } from './images/logo.svg';
+import { fontGrid } from '@mui/material/styles/cssUtils';
 
 const useStyles = makeStyles({
     header: {
-        backgroundColor: 'lightGray',
+        backgroundColor: 'skyblue',
         maxWidth: '1050px',
         margin: '0 auto', // Center the header
     },
     spacing: {
-        paddingLeft: 20,
         color: 'black',
         fontSize: '18px',
-        fontWeight: '500',
+        fontWeight: '600',
         textDecoration: 'none',
     }
 });
@@ -22,10 +23,9 @@ const Navbar = () => {
     return (
         <AppBar className={classes.header} position="static">
             <Toolbar >
-                <NavLink to="/" className={classes.spacing}>Weather in K-Landmarks</NavLink>
-                <NavLink to="/detailpage/1" className={classes.spacing}>1번 포항그림 눌렀을 때 </NavLink>
-                <NavLink to="all" className={classes.spacing}> All Comments</NavLink>
-                <NavLink to="add" className={classes.spacing}> Add Comments</NavLink>
+                 
+                <NavLink to="/" className={classes.spacing} style={{ paddingTop: 10, paddingLeft: 0, fontWeight: 'bold', fontSize: '1.1rem'}}><Logo width={100} height={80} />Weather in K-Landmarks</NavLink>
+                <NavLink to="all" className={classes.spacing} style={{ paddingTop: 5, marginLeft: 40,}}> All Comments</NavLink>
             </Toolbar>
         </AppBar>
     )
