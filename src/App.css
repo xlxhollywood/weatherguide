@@ -57,4 +57,5 @@
 
 .container {
   width: 1050px;
+  position: relative; /* 부모 요소를 기준으로 자식 요소 배치 */
 }

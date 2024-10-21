@@ -52,7 +52,7 @@ const AllComment = () => {
                             placeholder="Search by author's name"
 
                         />
-                        <Button for onClick={handleSearch}><i className="bi bi-search" style={{ fontSize: '1.5rem' }}></i></Button>
+                        <Button onClick={handleSearch}><i className="bi bi-search" style={{ fontSize: '1.5rem' }}></i></Button>
                     </Box>
                     <Box sx={{ maxHeight: '450px', overflowY: 'auto' }}>
                         {filteredComments.map((comment) => (

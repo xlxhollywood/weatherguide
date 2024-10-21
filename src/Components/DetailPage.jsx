@@ -15,6 +15,7 @@ const DetailPage = () => {
     useEffect(() => {
         getComments();
         fetchLandmarkInfo();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const getComments = async () => {
@@ -41,7 +42,7 @@ const DetailPage = () => {
     };
 
     const getLandmarkComments = (landmark_id) => {
-        return comments.filter(comment => comment.landmark_id == landmark_id);
+        return comments.filter(comment => comment.landmark_id === landmark_id);
     }
 
 
@@ -140,7 +141,7 @@ const DetailPage = () => {
                                 placeholder="Search by author's name"
 
                             />
-                            <Button for onClick={handleSearch}><i className="bi bi-search" style={{ fontSize: '1.5rem' }}></i></Button>
+                            <Button  onClick={handleSearch}><i className="bi bi-search" style={{ fontSize: '1.5rem' }}></i></Button>
                         </Box>
                         <Button variant="contained" color="primary" sx={{ mb: 2 }} component={Link} to={`/add/${landmark_id}`}>
                             새로운 후기 쓰기

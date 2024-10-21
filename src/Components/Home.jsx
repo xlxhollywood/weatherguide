@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Typography } from '@material-ui/core';
 import axios from 'axios';
 import './Home.css';
 
@@ -24,7 +23,6 @@ const ReviewCard = ({ image, address, title, starRating, reviewCount, weather, r
     <p className="review-title">{title}</p>
     {/* 기온, 강수량, 하늘 상태를 표시합니다 */}
     <p className="weather-info">기온: {weather ? `${weather} ℃` : 'Loading...'}</p>
-    <p className="rainfall-info">강수량: {rainfall ? `${rainfall} mm` : '0 mm'}</p>
     <p className="sky-info">하늘 상태: {skyCondition}</p> {/* 흐림/맑음 표시 */}
   </div>
 
@@ -87,7 +85,8 @@ const reviewData = [
 
 const Home = () => {
   const [weatherData, setWeatherData] = useState({});
-  const [rainfallData, setRainfallData] = useState({});
+  // eslint-disable-next-line no-unused-vars
+  const [rainfallData, setRainfallData] = useState({}); 
   const [skyData, setSkyData] = useState({}); // SKY 코드 상태
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -117,9 +116,7 @@ const Home = () => {
       // 초단기 실황 데이터를 처리
       ultraSrtResponses.forEach((response, index) => {
         const tempData = response.data.response.body.items.item.find(item => item.category === 'T1H') || { obsrValue: 'N/A' };
-        const rainData = response.data.response.body.items.item.find(item => item.category === 'RN1') || { obsrValue: 0 };
         setWeatherData(prevState => ({ ...prevState, [index]: tempData.obsrValue }));
-        setRainfallData(prevState => ({ ...prevState, [index]: rainData.obsrValue }));
       });
 
       // 단기 예보 (하늘 상태)
@@ -144,7 +141,7 @@ const Home = () => {
         const ptyData = response.data.response.body.items.item.find(item => item.category === 'PTY') || { fcstValue: 0 };
 
         // SKY 코드와 PTY 코드를 숫자로 출력
-        console.log(`Review ${index} - SKY 코드: ${skyData.fcstValue}, PTY 코드: ${ptyData.fcstValue}`);
+        // console.log(`Review ${index} - SKY 코드: ${skyData.fcstValue}, PTY 코드: ${ptyData.fcstValue}`);
 
         setSkyData(prevState => ({ ...prevState, [index]: getSkyCondition(skyData.fcstValue, ptyData.fcstValue) }));
       });
@@ -183,38 +180,39 @@ const Home = () => {
   }
 
   return (
-
     <div className='home-container'>
-      <hr></hr>
-      <div className='search-container'>
-        <input
-          type="text"
-          placeholder="장소를 검색하세요"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
+      <div className='search-parent-container'>
+        <div className='search-container'>
+          <input
+            type="text"
+            placeholder="장소를 검색하세요"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <span className="search-icon">🔍</span>
+        </div>
       </div>
       <div className='grid-container'>
         {filteredReviews.map((review, index) => (
-          <button id="navigateButton" onClick={() => clickToDetail(index)}>
+          <button 
+            id="navigateButton" 
+            onClick={() => clickToDetail(index)} 
+            key={review.address}  // 고유한 'address'를 key로 사용
+          >
             <ReviewCard
-              key={index}
+              key={review.address}  // ReviewCard에도 고유한 key 설정
               image={review.image}
               address={review.address}
               title={review.title}
               weather={weatherData[index]}
-              rainfall={rainfallData[index]}
               skyCondition={skyData[index]}
-              starRating={review.starRating}
-              reviewCount={review.reviewCount}
             />
           </button>
         ))}
       </div>
-
-      <Typography component="h3" align="center">Team Project</Typography>
     </div>
   );
+  
 };
 
 export default Home;

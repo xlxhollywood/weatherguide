@@ -1,5 +1,6 @@
 import './App.css';
 import Navbar from  './Components/Navbar';
+import Footer from  './Components/Footer';
 import Home from './Components/Home';
 import AllComments from './Components/AllComments';
 import EditUser from './Components/EditComment';
@@ -12,6 +13,9 @@ import AddComment from './Components/AddComment';
 function App() {
   return (
     <Router>
+      <div>
+        <hr></hr>
+      </div>
       <div className='container'>
       <Navbar />
       <Switch>
@@ -23,7 +27,10 @@ function App() {
         <Route component={NotFound} />
       </Switch>
       </div>
+      <hr></hr>
+      <Footer />  
     </Router>
+    
   );
 }
 

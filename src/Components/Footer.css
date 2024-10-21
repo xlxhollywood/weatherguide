@@ -1,0 +1,22 @@
+.footer-container {
+  display: flex;
+  justify-content: center;
+}
+
+footer {
+  width: 1050px;
+  display: flex;
+  justify-content:space-between;
+  height: 100px; 
+}
+
+footer p {
+  font-size: 16px;  /* 예시: 글자 크기 */
+  color: #444444;   /* 예시: 글자 색상 */
+  margin: 40px 0;   /* 예시: 위아래 마진 추가 */
+  text-align: center; /* 예시: 텍스트 가운데 정렬 */
+}
+
+footer ul {
+  margin: 40px 0;   /* 예시: 위아래 마진 추가 */ 
+}
