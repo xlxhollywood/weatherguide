@@ -37,11 +37,6 @@
 - **홈 화면**: 8개의 랜드마크 이미지와 간단한 날씨 정보를 표시, 각 랜드마크 클릭 시 상세 페이지로 이동
 - **상세 페이지**: 랜드마크의 큰 사진, 실시간 날씨 정보, 후기 목록, 후기 작성 및 수정/삭제 기능 제공
 
-## 역할 🤝
-
-- **오세훈 (22101050)**: 메인 뷰 설계, 공공 API 연동 및 날씨 정보 표시, 검색 기능 , 랜드마크 상세 페이지 구현, 댓글 CRUD 기능 (Mock API 연동), UI/UX 개선
-
-
 ## 일정 및 마일스톤 📅
 
 - 10/16: 메인 뷰 및 상세 페이지 디자인 (HTML/CSS)
@@ -57,6 +52,6 @@
 
 ---
 
-### **프로젝트 배포 URL**: [Netlify 배포 링크](https://koreanlandmarkweather.netlify.app/)
+### **프로젝트 배포 URL**: [Netlify 배포 링크](https://kweatherguide.netlify.app/)
 
-### **GitHub Repo**: [GitHub Repository](https://github.com/Joshuaii3712/2024-2_OSS_CRUD_TeamProject.git)
+
